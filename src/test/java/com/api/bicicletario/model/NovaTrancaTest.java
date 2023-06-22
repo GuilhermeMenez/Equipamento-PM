@@ -197,7 +197,7 @@ public class NovaTrancaTest {
     }
 
     @Test
-    public void testSetStatusEmManutencao() {
+    public void testSetStatusEmReparo() {
         // Verifica se o status da tranca é atualizado corretamente para EM_MANUTENCAO
         TrancaStatus expected = TrancaStatus.EM_REPARO;
         when(novaTranca.getStatus()).thenReturn(expected);
@@ -247,7 +247,7 @@ public class NovaTrancaTest {
     }
 
     @Test
-    public void testSetStatusEmReparo() {
+    public void testSetStatusEmReparo2() {
         // Set up the expected status
         TrancaStatus expected = TrancaStatus.EM_REPARO;
 
@@ -276,6 +276,4 @@ public class NovaTrancaTest {
         TrancaStatus actual = novaTranca.getStatus();
         assertEquals(expected, actual);
     }
-
-
 }
