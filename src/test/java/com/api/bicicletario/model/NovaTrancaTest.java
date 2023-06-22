@@ -1,5 +1,6 @@
 package com.api.bicicletario.model;
 import com.api.bicicletario.enumerator.TrancaStatus;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -136,6 +137,73 @@ public class NovaTrancaTest {
         tranca.setStatus(novoStatus);
 
         assertEquals(novoStatus, tranca.getStatus());
+    }
+    @Test
+    public void testSetStatusDesativada() {
+        // Verifica se o status da tranca é atualizado corretamente para DESATIVADA
+        TrancaStatus expected = TrancaStatus.APOSENTADA;
+        when(novaTranca.getStatus()).thenReturn(expected);
+
+        novaTranca.setStatus(expected);
+        TrancaStatus actual = novaTranca.getStatus();
+
+        verify(novaTranca, times(1)).setStatus(expected);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testConstrutor() {
+        // Verifica se o construtor atribui os valores corretos aos campos da tranca
+        Integer expectedNumero = 1;
+        String expectedLocalizacao = "Localização";
+        String expectedAnoDeFabricacao = "2021";
+        String expectedModelo = "Modelo";
+        TrancaStatus expectedStatus = TrancaStatus.OCUPADA;
+
+        NovaTranca novaTranca = new NovaTranca(expectedNumero, expectedLocalizacao, expectedAnoDeFabricacao, expectedModelo, expectedStatus);
+
+        Assertions.assertEquals(expectedNumero, novaTranca.getNumero());
+        Assertions.assertEquals(expectedLocalizacao, novaTranca.getLocalizacao());
+        Assertions.assertEquals(expectedAnoDeFabricacao, novaTranca.getAnoDeFabricacao());
+        Assertions.assertEquals(expectedModelo, novaTranca.getModelo());
+        Assertions.assertEquals(expectedStatus, novaTranca.getStatus());
+    }
+    @Test
+    public void testSetStatusAberta() {
+        // Verifica se o status da tranca é atualizado corretamente para ABERTA
+        TrancaStatus expected = TrancaStatus.OCUPADA;
+        when(novaTranca.getStatus()).thenReturn(expected);
+
+        novaTranca.setStatus(expected);
+        TrancaStatus actual = novaTranca.getStatus();
+
+        verify(novaTranca, times(1)).setStatus(expected);
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testSetStatusFechada() {
+        // Verifica se o status da tranca é atualizado corretamente para FECHADA
+        TrancaStatus expected = TrancaStatus.OCUPADA;
+        when(novaTranca.getStatus()).thenReturn(expected);
+
+        novaTranca.setStatus(expected);
+        TrancaStatus actual = novaTranca.getStatus();
+
+        verify(novaTranca, times(1)).setStatus(expected);
+        Assertions.assertEquals(expected, actual);
+    }
+    @Test
+    public void testSetStatusEmManutencao() {
+        // Verifica se o status da tranca é atualizado corretamente para EM_MANUTENCAO
+        TrancaStatus expected = TrancaStatus.EM_REPARO;
+        when(novaTranca.getStatus()).thenReturn(expected);
+
+        novaTranca.setStatus(expected);
+        TrancaStatus actual = novaTranca.getStatus();
+
+        verify(novaTranca, times(1)).setStatus(expected);
+        Assertions.assertEquals(expected, actual);
     }
 
 
