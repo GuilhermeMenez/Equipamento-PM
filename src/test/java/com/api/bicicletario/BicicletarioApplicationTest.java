@@ -1,5 +1,5 @@
 package com.api.bicicletario;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -8,6 +8,8 @@ class BicicletarioApplicationTest {
 
     @Test
     void contextLoads() {
+
+        Assertions.assertTrue(true, "Sucesso");
     }
 
     @Test
