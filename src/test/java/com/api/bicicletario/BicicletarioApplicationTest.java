@@ -1,9 +1,10 @@
-import com.api.bicicletario.BicicletarioApplication;
+package com.api.bicicletario;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = BicicletarioApplication.class)
-class BicicletarioApplicationTests {
+class BicicletarioApplicationTest {
 
     @Test
     void contextLoads() {

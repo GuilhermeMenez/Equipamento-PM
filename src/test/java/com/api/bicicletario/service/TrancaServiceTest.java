@@ -4,12 +4,13 @@ import com.api.bicicletario.enumerator.TrancaStatus;
 import com.api.bicicletario.model.Tranca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TrancaServiceTest {
 
@@ -82,21 +83,25 @@ public class TrancaServiceTest {
         assertEquals(TrancaStatus.APOSENTADA, trancaService.getTrancaById(1).getStatus());
     }
 
-    @Test
-    public void testDeleteTranca() {
-        int trancaId = 1;
-
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    public void testDeleteTranca(int trancaId) {
         trancaService.deleteTranca(trancaId);
-
         List<Tranca> remainingTrancas = trancaService.getTrancas();
         assertEquals(14, remainingTrancas.size());
 
-        Tranca remainingTranca = remainingTrancas.get(0);
-        assertEquals(2, remainingTranca.getId());
-        assertEquals("Bicicleta 2", remainingTranca.getBicicleta());
+        Tranca remainingTranca = null;
+        for (Tranca tranca : remainingTrancas) {
+            if (tranca.getId() == trancaId) {
+                remainingTranca = tranca;
+                break;
+            }
+        }
+
+        assertNull(remainingTranca);
     }
 
-    // Testes adicionais para as outras trancas
+
 
     @Test
     public void testGetTrancaById_WithInvalidId() {
@@ -144,20 +149,17 @@ public class TrancaServiceTest {
         assertEquals(15, trancaService.getTrancas().size());
     }
 
-    @Test
-    public void testDeleteTranca_WithExistingId() {
-        int trancaId = 1;
-
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3}) // Add more trancaIds if needed
+    public void testDeleteTranca_WithExistingId(int trancaId) {
         trancaService.deleteTranca(trancaId);
-
         List<Tranca> remainingTrancas = trancaService.getTrancas();
         assertEquals(14, remainingTrancas.size());
 
-        Tranca remainingTranca = remainingTrancas.get(0);
-        assertEquals(2, remainingTranca.getId());
-        assertEquals("Bicicleta 2", remainingTranca.getBicicleta());
+        for (Tranca remainingTranca : remainingTrancas) {
+            assertNotEquals(trancaId, remainingTranca.getId());
+        }
     }
-
 
 
     @Test
@@ -207,20 +209,6 @@ public class TrancaServiceTest {
         trancaService.deleteTranca(trancaId);
 
         assertEquals(15, trancaService.getTrancas().size());
-    }
-
-    @Test
-    public void testDeleteTranca_WithExistingId2() {
-        int trancaId = 1;
-
-        trancaService.deleteTranca(trancaId);
-
-        List<Tranca> remainingTrancas = trancaService.getTrancas();
-        assertEquals(14, remainingTrancas.size());
-
-        Tranca remainingTranca = remainingTrancas.get(0);
-        assertEquals(2, remainingTranca.getId());
-        assertEquals("Bicicleta 2", remainingTranca.getBicicleta());
     }
 
     @Test
