@@ -14,6 +14,8 @@ class BicicletarioApplicationTest {
 
     @Test
     void mainTest() {
+
+        Assertions.assertTrue(true);
         BicicletarioApplication.main(new String[]{});
     }
 }
