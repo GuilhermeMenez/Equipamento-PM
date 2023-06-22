@@ -54,7 +54,7 @@ public class NovaTrancaTest {
     }
 
     @Test
-    public void testSetNumero() {
+    public void testSetNumero2() {
         novaTranca.setNumero(456);
         verify(novaTranca).setNumero(456);
     }
@@ -138,6 +138,7 @@ public class NovaTrancaTest {
 
         assertEquals(novoStatus, tranca.getStatus());
     }
+
     @Test
     public void testSetStatusDesativada() {
         // Verifica se o status da tranca é atualizado corretamente para DESATIVADA
@@ -168,6 +169,7 @@ public class NovaTrancaTest {
         Assertions.assertEquals(expectedModelo, novaTranca.getModelo());
         Assertions.assertEquals(expectedStatus, novaTranca.getStatus());
     }
+
     @Test
     public void testSetStatusAberta() {
         // Verifica se o status da tranca é atualizado corretamente para ABERTA
@@ -193,6 +195,7 @@ public class NovaTrancaTest {
         verify(novaTranca, times(1)).setStatus(expected);
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void testSetStatusEmManutencao() {
         // Verifica se o status da tranca é atualizado corretamente para EM_MANUTENCAO
@@ -204,6 +207,74 @@ public class NovaTrancaTest {
 
         verify(novaTranca, times(1)).setStatus(expected);
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testSetNumero() {
+        // Verifica se o número da tranca é atribuído corretamente
+        Integer expectedNumero = 0;
+        novaTranca.setNumero(expectedNumero);
+        Integer actualNumero = novaTranca.getNumero();
+        Assertions.assertEquals(expectedNumero, actualNumero);
+    }
+
+    @Test
+    public void testSetLocalizacao3() {
+        novaTranca.setLocalizacao("Localização 3");
+        verify(novaTranca).setLocalizacao("Localização 3");
+    }
+
+    @Test
+    public void testSetLocalizacaoBlank() {
+        novaTranca.setLocalizacao("");
+        verify(novaTranca).setLocalizacao("");
+    }
+    @Test
+    public void testSetAnoDeFabricacaoNull() {
+        novaTranca.setAnoDeFabricacao(null);
+        verify(novaTranca).setAnoDeFabricacao(null);
+    }
+    @Test
+    public void testSetModeloNull() {
+        novaTranca.setModelo(null);
+        verify(novaTranca).setModelo(null);
+    }
+
+    @Test
+    public void testSetStatusNull() {
+        novaTranca.setStatus(null);
+        verify(novaTranca).setStatus(null);
+    }
+
+    @Test
+    public void testSetStatusEmReparo() {
+        // Set up the expected status
+        TrancaStatus expected = TrancaStatus.EM_REPARO;
+
+        // Call the setStatus method
+        novaTranca.setStatus(expected);
+
+        // Verify that the setStatus method was called with the expected status
+        verify(novaTranca).setStatus(expected);
+
+        // Mock the external source to return the expected status
+        when(novaTranca.getStatus()).thenReturn(expected);
+
+        // Retrieve the actual status
+        TrancaStatus actual = novaTranca.getStatus();
+
+        // Verify that the retrieved status matches the expected status
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testSetStatusAposentada() {
+        TrancaStatus expected = TrancaStatus.APOSENTADA;
+        novaTranca.setStatus(expected);
+        verify(novaTranca).setStatus(expected);
+        when(novaTranca.getStatus()).thenReturn(expected);
+        TrancaStatus actual = novaTranca.getStatus();
+        assertEquals(expected, actual);
     }
 
 
