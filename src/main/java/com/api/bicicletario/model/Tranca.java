@@ -11,6 +11,8 @@ public class Tranca {
     private String anoDeFabricacao;
     private String modelo;
     private TrancaStatus status;
+    private int funcionarioId;
+
 
     public Tranca(int id, String bicicleta, int numero, String localizacao, String anoDeFabricacao, String modelo, TrancaStatus status) {
         this.id = id;
@@ -108,5 +110,15 @@ public class Tranca {
         result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
+    }
+
+
+
+    public int getFuncionarioId() {
+        return funcionarioId;
+    }
+
+    public void setFuncionarioId(int funcionarioId) {
+        this.funcionarioId = funcionarioId;
     }
 }
