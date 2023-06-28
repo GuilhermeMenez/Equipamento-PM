@@ -3,6 +3,7 @@ package com.api.bicicletario.service;
 import com.api.bicicletario.enumerator.BicicletaStatus;
 import com.api.bicicletario.enumerator.TrancaStatus;
 import com.api.bicicletario.model.Bicicleta;
+import com.api.bicicletario.model.Reparo;
 import com.api.bicicletario.model.Totem;
 import com.api.bicicletario.model.Tranca;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,7 +115,7 @@ public class BicicletaService {
         if (!tranca.getStatus().equals(TrancaStatus.OCUPADA)) {
             throw new IllegalArgumentException("A tranca não está presa.");
         }
-
+        Reparo reparo = new Reparo(bicicleta,tranca,statusAcaoReparador);
         bicicleta.setStatus(BicicletaStatus.EM_REPARO);
         tranca.setFuncionarioId(idFuncionario);
     }

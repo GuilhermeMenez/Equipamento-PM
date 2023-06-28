@@ -12,7 +12,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/tranca")
 public class TrancaController {
-    //private final TrancaService trancaService;
     @Autowired
     private TrancaService trancaService;
     public TrancaController(TrancaService trancaService) {
