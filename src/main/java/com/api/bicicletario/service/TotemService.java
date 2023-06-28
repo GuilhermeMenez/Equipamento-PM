@@ -3,6 +3,7 @@ package com.api.bicicletario.service;
 import com.api.bicicletario.enumerator.TrancaStatus;
 import com.api.bicicletario.model.Totem;
 import com.api.bicicletario.model.Tranca;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,10 +14,13 @@ import java.util.Map;
 @Service
 public class TotemService {
     private final Map<Integer, Totem> totens;
-
+    private final Map<Integer, Tranca> trancas;
+     @Autowired
     public TotemService() {
         this.totens = new HashMap<>();
-    }
+        this.trancas = new HashMap<>();
+
+     }
 
     public Totem criarTotem(Totem totem) {
         int novoId = gerarNovoId();
@@ -80,6 +84,12 @@ public class TotemService {
 
         tranca.setStatus(TrancaStatus.LIVRE);
     }
+    public Tranca getTrancaById(int id) {
+        return trancas.get(id);
+    }
+
+
+
 }
 
 

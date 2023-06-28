@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import static org.mockito.Mockito.*;
 class BicicletaControllerTest {
     @InjectMocks
     private BicicletaController bicicletaController;
+
+
 
     @Mock
     private BicicletaService bicicletaService;
@@ -81,5 +84,8 @@ class BicicletaControllerTest {
 
         verify(bicicletaService, times(1)).removerBicicleta(1);
     }
+
+
+
 }
 

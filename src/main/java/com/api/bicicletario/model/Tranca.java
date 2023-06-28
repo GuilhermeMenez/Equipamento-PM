@@ -5,7 +5,7 @@ import com.api.bicicletario.enumerator.TrancaStatus;
 // Model: Tranca.java
 public class Tranca {
     private int id;
-    private String bicicleta;
+    private Bicicleta bicicleta;
     private int numero;
     private String localizacao;
     private String anoDeFabricacao;
@@ -13,8 +13,7 @@ public class Tranca {
     private TrancaStatus status;
     private int funcionarioId;
 
-
-    public Tranca(int id, String bicicleta, int numero, String localizacao, String anoDeFabricacao, String modelo, TrancaStatus status) {
+    public Tranca(int id, Bicicleta bicicleta, int numero, String localizacao, String anoDeFabricacao, String modelo, TrancaStatus status) {
         this.id = id;
         this.bicicleta = bicicleta;
         this.numero = numero;
@@ -34,11 +33,11 @@ public class Tranca {
         this.id = id;
     }
 
-    public String getBicicleta() {
+    public Bicicleta getBicicleta() {
         return bicicleta;
     }
 
-    public void setBicicleta(String bicicleta) {
+    public void setBicicleta(Bicicleta bicicleta) {
         this.bicicleta = bicicleta;
     }
 
@@ -112,8 +111,6 @@ public class Tranca {
         return result;
     }
 
-
-
     public int getFuncionarioId() {
         return funcionarioId;
     }
@@ -121,4 +118,6 @@ public class Tranca {
     public void setFuncionarioId(int funcionarioId) {
         this.funcionarioId = funcionarioId;
     }
+
+
 }

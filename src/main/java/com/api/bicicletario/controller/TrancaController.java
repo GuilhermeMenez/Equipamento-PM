@@ -1,6 +1,9 @@
 package com.api.bicicletario.controller;
+import com.api.bicicletario.enumerator.TrancaStatus;
+import com.api.bicicletario.model.RetirarTranca;
 import com.api.bicicletario.model.Tranca;
 import com.api.bicicletario.service.TrancaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/tranca")
 public class TrancaController {
-    private final TrancaService trancaService;
-
+    //private final TrancaService trancaService;
+    @Autowired
+    private TrancaService trancaService;
     public TrancaController(TrancaService trancaService) {
         this.trancaService = trancaService;
     }
@@ -52,4 +56,30 @@ public class TrancaController {
         trancaService.deleteTranca(Math.toIntExact(id));
         return ResponseEntity.noContent().build();
     }
+    @PostMapping("/retirarDaRede")
+    public ResponseEntity<String> retirarTrancaDaRede(@RequestBody RetirarTranca request) {
+        Tranca tranca = getTrancaById(request.getIdTranca()).getBody();
+
+        if (tranca == null) {
+            return ResponseEntity.badRequest().body("ID de tranca inválido.");
+        }
+
+        if (tranca.getStatus() != TrancaStatus.EM_REPARO) {
+            return ResponseEntity.badRequest().body("A tranca não está com o status 'em reparo'.");
+        }
+
+        if (request.getStatusacaoReparador().equals("reparo")) {
+            tranca.setStatus(TrancaStatus.OCUPADA);
+        } else if (request.getStatusacaoReparador().equals("aposentadoria")) {
+            tranca.setStatus(TrancaStatus.APOSENTADA);
+        } else {
+            return ResponseEntity.badRequest().body("Opção inválida.");
+        }
+
+        trancaService.updateTranca(tranca);
+
+        return ResponseEntity.ok("Tranca retirada com sucesso da rede.");
+    }
+
+
 }

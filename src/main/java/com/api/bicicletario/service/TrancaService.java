@@ -1,6 +1,7 @@
 package com.api.bicicletario.service;
 
 import com.api.bicicletario.model.Tranca;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class TrancaService {
     private final Map<Integer, Tranca> trancasMap;
     private Integer nextId;
 
+    @Autowired
     public TrancaService(List<Tranca> trancas) {
         trancasMap = new HashMap<>();
         nextId = 1;

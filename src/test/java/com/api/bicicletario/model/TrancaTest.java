@@ -1,5 +1,6 @@
 package com.api.bicicletario.model;
 
+import com.api.bicicletario.enumerator.BicicletaStatus;
 import com.api.bicicletario.enumerator.TrancaStatus;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,14 +35,16 @@ class TrancaTest {
 
     @Test
     void testGetBicicleta() {
-        when(mockTranca.getBicicleta()).thenReturn("Bike");
-        assertEquals("Bike", mockTranca.getBicicleta());
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2022", 123, BicicletaStatus.DISPONIVEL);
+        when(mockTranca.getBicicleta()).thenReturn(bicicleta);
+        assertEquals(bicicleta, mockTranca.getBicicleta());
     }
 
     @Test
     void testSetBicicleta() {
-        mockTranca.setBicicleta("Bike");
-        verify(mockTranca).setBicicleta("Bike");
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2022", 123, BicicletaStatus.DISPONIVEL);
+        mockTranca.setBicicleta(bicicleta);
+        verify(mockTranca).setBicicleta(bicicleta);
     }
 
     @Test
@@ -106,15 +109,17 @@ class TrancaTest {
 
     @Test
     void testEquals() {
-        Tranca tranca1 = new Tranca(1, "Bike", 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
-        Tranca tranca2 = new Tranca(1, "Bike", 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        Tranca tranca1 = new Tranca(1, bicicleta, 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
+        Tranca tranca2 = new Tranca(1, bicicleta, 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
         assertEquals(tranca1, tranca2);
     }
 
     @Test
     void testHashCode() {
-        Tranca tranca1 = new Tranca(1, "Bike", 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
-        Tranca tranca2 = new Tranca(1, "Bike", 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2022", 123, BicicletaStatus.DISPONIVEL);
+        Tranca tranca1 = new Tranca(1, bicicleta, 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
+        Tranca tranca2 = new Tranca(1, bicicleta, 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
         assertEquals(tranca1.hashCode(), tranca2.hashCode());
     }
 }

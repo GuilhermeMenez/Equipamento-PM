@@ -1,6 +1,8 @@
 package com.api.bicicletario.service;
 
+import com.api.bicicletario.enumerator.BicicletaStatus;
 import com.api.bicicletario.enumerator.TrancaStatus;
+import com.api.bicicletario.model.Bicicleta;
 import com.api.bicicletario.model.Totem;
 import com.api.bicicletario.model.Tranca;
 import org.junit.jupiter.api.Assertions;
@@ -17,10 +19,13 @@ public class TotemServiceTest {
 
     @BeforeEach
     public void setup() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.EM_REPARO);
+        Bicicleta bicicleta2 = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.EM_REPARO);
+
         totemService = new TotemService();
         totem = new Totem(1, "Localização do Totem", "Descrição do Totem");
-        trancaNova = new Tranca(1, "Bicicleta 1", 1234, "Localização A", "2022", "Modelo X", TrancaStatus.NOVA);
-        trancaEmReparo = new Tranca(2, "Bicicleta 2", 5678, "Localização B", "2021", "Modelo Y", TrancaStatus.EM_REPARO);
+        trancaNova = new Tranca(1, bicicleta, 1234, "Localização A", "2022", "Modelo X", TrancaStatus.NOVA);
+        trancaEmReparo = new Tranca(2, bicicleta2, 5678, "Localização B", "2021", "Modelo Y", TrancaStatus.EM_REPARO);
         trancaEmReparo.setFuncionarioId(funcionarioId);
     }
 
@@ -56,8 +61,10 @@ public class TotemServiceTest {
 
     @Test
     public void incluirTrancaEmTotem_InvalidStatus_ThrowsIllegalArgumentException() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.EM_REPARO);
+
         // Arrange
-        Tranca trancaInvalida = new Tranca(3, "Bicicleta 3", 9876, "Localização C", "2023", "Modelo Z", TrancaStatus.APOSENTADA);
+        Tranca trancaInvalida = new Tranca(3, bicicleta, 9876, "Localização C", "2023", "Modelo Z", TrancaStatus.APOSENTADA);
 
         // Act & Assert
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
