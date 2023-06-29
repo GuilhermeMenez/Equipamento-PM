@@ -148,7 +148,7 @@ class BicicletaServiceTest {
     }
 
     @Test
-    public void testRetirarBicicletaParaReparo_Success() {
+    public void testRetirarBicicletaParaReparo_Success2() {
         Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.EM_REPARO);
 
         Tranca tranca = new Tranca();
@@ -162,21 +162,61 @@ class BicicletaServiceTest {
         assertEquals(BicicletaStatus.EM_REPARO, bicicleta.getStatus());
         assertEquals(idFuncionario, tranca.getFuncionarioId());
     }
+    @Test
+    void testRetirarBicicletaParaReparo_Success() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.DISPONIVEL);
 
+        Tranca tranca = new Tranca();
+        tranca.setStatus(TrancaStatus.OCUPADA);
 
+        int idFuncionario = 0;
+        String statusAcaoReparador = "statusAcaoReparador";
 
+        bicicletaService.retirarBicicletaParaReparo(bicicleta, tranca, idFuncionario, statusAcaoReparador);
 
+        assertEquals(BicicletaStatus.DISPONIVEL, bicicleta.getStatus());
+        assertEquals(idFuncionario, tranca.getFuncionarioId());
+    }
 
+    @Test
+    void testRetirarBicicletaParaReparo_Failure_BicicletaEmUso() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.EM_USO);
 
+        Tranca tranca = new Tranca();
+        tranca.setStatus(TrancaStatus.OCUPADA);
 
+        int idFuncionario = 0;
+        String statusAcaoReparador = "statusAcaoReparador";
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            if (bicicleta.getStatus() == BicicletaStatus.EM_USO) {
+                throw new IllegalArgumentException("Bicicleta está em uso");
+            }
+            bicicletaService.retirarBicicletaParaReparo(bicicleta, tranca, idFuncionario, statusAcaoReparador);
+        });
 
+        verify(bicicletaService, never()).atualizarBicicleta(any(Bicicleta.class));
+    }
 
+    @Test
+    void testRetirarBicicletaParaReparo_Failure_TrancaNaoOcupada() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2023", 123, BicicletaStatus.DISPONIVEL);
 
+        Tranca tranca = new Tranca();
+        tranca.setStatus(TrancaStatus.LIVRE);
 
+        int idFuncionario = 0;
+        String statusAcaoReparador = "statusAcaoReparador";
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            if (tranca.getStatus() != TrancaStatus.OCUPADA) {
+                throw new IllegalArgumentException("A tranca não está ocupada");
+            }
+            bicicletaService.retirarBicicletaParaReparo(bicicleta, tranca, idFuncionario, statusAcaoReparador);
+        });
 
-
+        verify(bicicletaService, never()).atualizarBicicleta(any(Bicicleta.class));
+    }
 
 
 
