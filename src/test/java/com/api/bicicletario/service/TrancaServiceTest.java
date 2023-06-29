@@ -3,6 +3,7 @@ package com.api.bicicletario.service;
 import com.api.bicicletario.enumerator.BicicletaStatus;
 import com.api.bicicletario.enumerator.TrancaStatus;
 import com.api.bicicletario.model.Bicicleta;
+import com.api.bicicletario.model.Totem;
 import com.api.bicicletario.model.Tranca;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 public class TrancaServiceTest {
 

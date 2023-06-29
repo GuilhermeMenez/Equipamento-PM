@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+
 public class TotemServiceTest {
 
     private TotemService totemService;
@@ -35,9 +38,9 @@ public class TotemServiceTest {
         totemService.incluirTrancaEmTotem(totem, trancaNova, funcionarioId);
 
         // Assert
-        Assertions.assertEquals(1, totem.getTrancas().size());
-        Assertions.assertEquals(trancaNova, totem.getTrancas().get(0));
-        Assertions.assertEquals(TrancaStatus.LIVRE, trancaNova.getStatus());
+        assertEquals(1, totem.getTrancas().size());
+        assertEquals(trancaNova, totem.getTrancas().get(0));
+        assertEquals(TrancaStatus.LIVRE, trancaNova.getStatus());
     }
 
     @Test
@@ -46,9 +49,9 @@ public class TotemServiceTest {
         totemService.incluirTrancaEmTotem(totem, trancaEmReparo, funcionarioId);
 
         // Assert
-        Assertions.assertEquals(1, totem.getTrancas().size());
-        Assertions.assertEquals(trancaEmReparo, totem.getTrancas().get(0));
-        Assertions.assertEquals(TrancaStatus.LIVRE, trancaEmReparo.getStatus());
+        assertEquals(1, totem.getTrancas().size());
+        assertEquals(trancaEmReparo, totem.getTrancas().get(0));
+        assertEquals(TrancaStatus.LIVRE, trancaEmReparo.getStatus());
     }
 
     @Test
@@ -81,5 +84,34 @@ public class TotemServiceTest {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             totemService.incluirTrancaEmTotem(totem, trancaEmReparo, invalidFuncionarioId);
         });
+    }
+
+    @Test
+    void testAtualizarTotem_TotemExistente() {
+        // Cenário
+        int id = 1;
+        Totem totemExistente = new Totem(id, "Lugar", "Totem");
+        Totem totemAtualizado = new Totem(id, "Novo Lugar", "Novo Totem");
+
+        totemService.criarTotem(totemExistente);
+        Totem resultado = totemService.atualizarTotem(id, totemAtualizado);
+
+        // Verificação
+        assertNotNull(resultado);
+        assertEquals(totemAtualizado, resultado);
+
+    }
+
+    @Test
+    void testAtualizarTotem_TotemNaoExistente() {
+        // Cenário
+        int id = 1;
+        Totem totemAtualizado = new Totem(id, "Novo Lugar", "Novo Totem");
+
+        Totem resultado = totemService.atualizarTotem(id, totemAtualizado);
+
+        // Verificação
+        assertNull(resultado);
+
     }
 }
