@@ -3,6 +3,8 @@ import com.api.bicicletario.enumerator.BicicletaStatus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+
 public class BicicletaTest {
     private Bicicleta bicicleta;
 
@@ -75,5 +77,14 @@ public class BicicletaTest {
         bicicleta.setNumero(456);
         int novoNumero = bicicleta.getNumero();
         Assert.assertEquals(456, novoNumero);
+    }
+
+    @Test
+    public void testSetStatus2() {
+        BicicletaStatus novoStatus = BicicletaStatus.REPARO_SOLICITADO;
+
+        bicicleta.setStatus(novoStatus);
+
+        Assert.assertEquals(novoStatus, bicicleta.getStatus());
     }
 }
