@@ -190,12 +190,151 @@ class TrancaTest {
     }
 
     @Test
-    void testHashCode2() {
-        Tranca tranca = new Tranca();
-        tranca.setId(1);
-        int expectedHashCode = 31 * 17 + 1;
+    public void testHashCodeEqualObjects() {
+        Bicicleta bicicleta = new Bicicleta(1, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta.setId(1);
+        bicicleta.setMarca("Marca");
+        bicicleta.setModelo("Modelo");
 
-        assertEquals(expectedHashCode, tranca.hashCode());
+        Tranca tranca1 = new Tranca();
+        tranca1.setId(1);
+        tranca1.setBicicleta(bicicleta);
+        tranca1.setNumero(10);
+        tranca1.setLocalizacao("Local");
+        tranca1.setAnoDeFabricacao("2022");
+        tranca1.setModelo("Modelo");
+        tranca1.setStatus(TrancaStatus.LIVRE);
+
+        Tranca tranca2 = new Tranca();
+        tranca2.setId(1);
+        tranca2.setBicicleta(bicicleta);
+        tranca2.setNumero(10);
+        tranca2.setLocalizacao("Local");
+        tranca2.setAnoDeFabricacao("2022");
+        tranca2.setModelo("Modelo");
+        tranca2.setStatus(TrancaStatus.LIVRE);
+
+        assertEquals(tranca1.hashCode(), tranca2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeSameObject() {
+        Tranca tranca1 = new Tranca();
+        int hashCode1 = tranca1.hashCode();
+        int hashCode2 = tranca1.hashCode();
+        assertEquals(hashCode1, hashCode2);
+    }
+    @Test
+    public void testHashCodeDifferentObjects() {
+        Bicicleta bicicleta1 = new Bicicleta(1, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta1.setId(1);
+        bicicleta1.setMarca("Marca1");
+        bicicleta1.setModelo("Modelo1");
+
+        Bicicleta bicicleta2 = new Bicicleta(2, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta2.setId(2);
+        bicicleta2.setMarca("Marca2");
+        bicicleta2.setModelo("Modelo2");
+
+        Tranca tranca1 = new Tranca();
+        tranca1.setId(1);
+        tranca1.setBicicleta(bicicleta1);
+        tranca1.setNumero(10);
+        tranca1.setLocalizacao("Local1");
+        tranca1.setAnoDeFabricacao("2022");
+        tranca1.setModelo("Modelo1");
+        tranca1.setStatus(TrancaStatus.LIVRE);
+
+        Tranca tranca2 = new Tranca();
+        tranca2.setId(2);
+        tranca2.setBicicleta(bicicleta2);
+        tranca2.setNumero(20);
+        tranca2.setLocalizacao("Local2");
+        tranca2.setAnoDeFabricacao("2023");
+        tranca2.setModelo("Modelo2");
+        tranca2.setStatus(TrancaStatus.APOSENTADA);
+
+        assertNotEquals(tranca1.hashCode(), tranca2.hashCode());
+    }
+
+    @Test
+    public void testEqualsSameObject() {
+        Tranca tranca = new Tranca();
+        assertEquals(tranca, tranca);
+    }
+
+    @Test
+    public void testEqualsNullObject() {
+        Tranca tranca = new Tranca();
+        assertNotNull(tranca);
+    }
+
+    @Test
+    public void testEqualsDifferentClass() {
+        Tranca tranca = new Tranca();
+        assertNotEquals("string", tranca);
+    }
+
+
+    @Test
+    public void testEqualsEqualObjects() {
+        Bicicleta bicicleta = new Bicicleta(2, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta.setId(1);
+        bicicleta.setMarca("Marca");
+        bicicleta.setModelo("Modelo");
+
+        Tranca tranca1 = new Tranca();
+        tranca1.setId(1);
+        tranca1.setBicicleta(bicicleta);
+        tranca1.setNumero(10);
+        tranca1.setLocalizacao("Local");
+        tranca1.setAnoDeFabricacao("2022");
+        tranca1.setModelo("Modelo");
+        tranca1.setStatus(TrancaStatus.LIVRE);
+
+        Tranca tranca2 = new Tranca();
+        tranca2.setId(1);
+        tranca2.setBicicleta(bicicleta);
+        tranca2.setNumero(10);
+        tranca2.setLocalizacao("Local");
+        tranca2.setAnoDeFabricacao("2022");
+        tranca2.setModelo("Modelo");
+        tranca2.setStatus(TrancaStatus.LIVRE);
+
+        assertEquals(tranca1, tranca2);
+    }
+
+    @Test
+    public void testEqualsDifferentObjects() {
+        Bicicleta bicicleta1 = new Bicicleta(2, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta1.setId(1);
+        bicicleta1.setMarca("Marca1");
+        bicicleta1.setModelo("Modelo1");
+
+        Bicicleta bicicleta2 = new Bicicleta(2, "Marca", "Modelo", "2022", 123,BicicletaStatus.DISPONIVEL);
+        bicicleta2.setId(2);
+        bicicleta2.setMarca("Marca2");
+        bicicleta2.setModelo("Modelo2");
+
+        Tranca tranca1 = new Tranca();
+        tranca1.setId(1);
+        tranca1.setBicicleta(bicicleta1);
+        tranca1.setNumero(10);
+        tranca1.setLocalizacao("Local1");
+        tranca1.setAnoDeFabricacao("2022");
+        tranca1.setModelo("Modelo1");
+        tranca1.setStatus(TrancaStatus.LIVRE);
+
+        Tranca tranca2 = new Tranca();
+        tranca2.setId(2);
+        tranca2.setBicicleta(bicicleta2);
+        tranca2.setNumero(20);
+        tranca2.setLocalizacao("Local2");
+        tranca2.setAnoDeFabricacao("2023");
+        tranca2.setModelo("Modelo2");
+        tranca2.setStatus(TrancaStatus.EM_REPARO);
+
+        assertFalse(tranca1.equals(tranca2));
     }
 
 }

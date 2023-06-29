@@ -2,6 +2,8 @@ package com.api.bicicletario.model;
 
 import com.api.bicicletario.enumerator.TrancaStatus;
 
+import java.util.Objects;
+
 // Model: Tranca.java
 public class Tranca {
     private int id;
@@ -86,16 +88,17 @@ public class Tranca {
         if (this == obj) {
             return true;
         }
-
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-
-        Tranca other = (Tranca) obj;
-
-        return id == other.id && bicicleta.equals(other.bicicleta) && numero == other.numero &&
-                localizacao.equals(other.localizacao) && anoDeFabricacao.equals(other.anoDeFabricacao) &&
-                modelo.equals(other.modelo) && status == other.status;
+        Tranca otherTranca = (Tranca) obj;
+        return id == otherTranca.id &&
+                Objects.equals(bicicleta, otherTranca.bicicleta) &&
+                numero == otherTranca.numero &&
+                Objects.equals(localizacao, otherTranca.localizacao) &&
+                Objects.equals(anoDeFabricacao, otherTranca.anoDeFabricacao) &&
+                Objects.equals(modelo, otherTranca.modelo) &&
+                status == otherTranca.status;
     }
 
     @Override
@@ -110,7 +113,6 @@ public class Tranca {
         result = 31 * result + (status != null ? status.hashCode() : 0);
         return result;
     }
-
     public int getFuncionarioId() {
         return funcionarioId;
     }
