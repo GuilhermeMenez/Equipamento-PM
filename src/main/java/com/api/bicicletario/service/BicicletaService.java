@@ -42,7 +42,6 @@ public class BicicletaService {
 
     public void adicionarBicicleta(Bicicleta bicicleta) {
         bicicleta.setId(nextId++);
-        bicicleta.setStatus(BicicletaStatus.APOSENTADA); // Atualiza o status para "APOSENTADA"
         bicicletas.add(bicicleta);
     }
 
@@ -79,7 +78,7 @@ public class BicicletaService {
 
         tranca.setFuncionarioId(idFuncionario);
 
-        Totem totem = totemService.obterTotemPorId(idTotem); // Obtenha o totem desejado para inclusão da tranca
+        Totem totem = totemService.obterTotemPorId(idTotem);
 
         if (totem == null) {
             return false;
