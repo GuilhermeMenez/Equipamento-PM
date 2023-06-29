@@ -185,7 +185,7 @@ class TrancaTest {
 
         assertEquals(tranca1, tranca2); // Same ID
         assertNotEquals(tranca1, tranca3); // Different ID
-        assertNotEquals(tranca1, null); // Comparing with null
+        assertNotEquals(null, tranca1); // Comparing with null
         assertNotEquals(tranca1, new Object()); // Comparing with different object type
     }
 
@@ -334,7 +334,7 @@ class TrancaTest {
         tranca2.setModelo("Modelo2");
         tranca2.setStatus(TrancaStatus.EM_REPARO);
 
-        assertFalse(tranca1.equals(tranca2));
+        assertNotEquals(tranca1, tranca2);
     }
 
 }

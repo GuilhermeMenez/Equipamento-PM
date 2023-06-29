@@ -114,7 +114,7 @@ public class BicicletaService {
         if (!tranca.getStatus().equals(TrancaStatus.OCUPADA)) {
             throw new IllegalArgumentException("A tranca não está presa.");
         }
-        Reparo reparo = new Reparo(bicicleta,tranca,statusAcaoReparador);
+
         bicicleta.setStatus(BicicletaStatus.EM_REPARO);
         tranca.setFuncionarioId(idFuncionario);
     }
