@@ -244,7 +244,7 @@ class BicicletaServiceTest {
         Tranca tranca = new Tranca();
         tranca.setStatus(TrancaStatus.OCUPADA);
         int idFuncionario = 123;
-        String statusAcaoReparador = "statusAcaoReparador";
+        String statusAcaoReparador = BicicletaStatus.EM_REPARO.toString();
 
         // Execução
         bicicletaService.retirarBicicletaParaReparo(bicicleta, tranca, idFuncionario, statusAcaoReparador);

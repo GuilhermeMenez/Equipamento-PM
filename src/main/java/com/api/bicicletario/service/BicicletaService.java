@@ -115,7 +115,7 @@ public class BicicletaService {
             throw new IllegalArgumentException("A tranca não está presa.");
         }
 
-        bicicleta.setStatus(BicicletaStatus.EM_REPARO);
+        bicicleta.setStatus(BicicletaStatus.valueOf(statusAcaoReparador));
         tranca.setFuncionarioId(idFuncionario);
     }
 
