@@ -15,7 +15,8 @@ class TrancaTest {
 
     @Mock
     private Tranca mockTranca;
-
+    @Mock
+    private Bicicleta mockBicicleta;
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
@@ -122,4 +123,79 @@ class TrancaTest {
         Tranca tranca2 = new Tranca(1, bicicleta, 123, "Location", "2022", "Model", TrancaStatus.LIVRE);
         assertEquals(tranca1.hashCode(), tranca2.hashCode());
     }
+
+    @Test
+    void testSetLocalizacao2() {
+        Tranca tranca = new Tranca();
+        String newLocalizacao = "Park A";
+
+        tranca.setLocalizacao(newLocalizacao);
+
+        assertEquals(newLocalizacao, tranca.getLocalizacao());
+    }
+    @Test
+    void testSetNumero2() {
+        Tranca tranca = new Tranca();
+        int newNumero = 123;
+
+        tranca.setNumero(newNumero);
+
+        assertEquals(newNumero, tranca.getNumero());
+    }
+
+    @Test
+    void testSetLocalizacao3() {
+        Tranca tranca = new Tranca();
+        String newLocalizacao = "Park A";
+
+        tranca.setLocalizacao(newLocalizacao);
+
+        assertEquals(newLocalizacao, tranca.getLocalizacao());
+    }
+
+    @Test
+    void testSetAnoDeFabricacao2() {
+        Tranca tranca = new Tranca();
+        String newAnoDeFabricacao = "2022";
+
+        tranca.setAnoDeFabricacao(newAnoDeFabricacao);
+
+        assertEquals(newAnoDeFabricacao, tranca.getAnoDeFabricacao());
+    }
+
+    @Test
+    void testSetModelo2() {
+        Tranca tranca = new Tranca();
+        String newModelo = "Model X";
+
+        tranca.setModelo(newModelo);
+
+        assertEquals(newModelo, tranca.getModelo());
+    }
+
+
+    @Test
+    void testEquals2() {
+        Tranca tranca1 = new Tranca();
+        tranca1.setId(1);
+        Tranca tranca2 = new Tranca();
+        tranca2.setId(1);
+        Tranca tranca3 = new Tranca();
+        tranca3.setId(2);
+
+        assertEquals(tranca1, tranca2); // Same ID
+        assertNotEquals(tranca1, tranca3); // Different ID
+        assertNotEquals(tranca1, null); // Comparing with null
+        assertNotEquals(tranca1, new Object()); // Comparing with different object type
+    }
+
+    @Test
+    void testHashCode2() {
+        Tranca tranca = new Tranca();
+        tranca.setId(1);
+        int expectedHashCode = 31 * 17 + 1;
+
+        assertEquals(expectedHashCode, tranca.hashCode());
+    }
+
 }
